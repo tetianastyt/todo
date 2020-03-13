@@ -1,0 +1,19 @@
+.header {
+    margin: 0;
+    padding: 44px 0 23px 0;
+    text-align: center;
+    color: white;
+    background-color: #222222;
+    font-size: 40px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+}
+.header h1 {
+    color: #797979;
+    padding: 0 auto 0;
+    font-size: 16px;
+}
+.colorBlue {
+    color: #2c98f2;
+}

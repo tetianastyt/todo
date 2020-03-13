@@ -1,0 +1,14 @@
+.todoListItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    border-top: 3px solid #dbdbdb;
+}
+.buttons {
+    margin-right: 0;
+    display: flex;
+    flex-direction: row;
+}
+

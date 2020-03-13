@@ -1,0 +1,14 @@
+.wrapper{
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 180px;
+    margin-bottom: 90px;
+    min-height: 100%;
+}
+
+@media screen and (max-width: 560px){
+    .wrapper{
+        margin-right: 5%;
+        margin-left: 5%;
+    }
+}

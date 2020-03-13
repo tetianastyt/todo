@@ -1,0 +1,17 @@
+.addNewItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 0;
+    align-items: center;
+}
+.styledInput {
+    border:1px solid #bababa;
+    border-radius: 5px;
+    color: #bababa;
+    padding: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
+}
