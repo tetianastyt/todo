@@ -26,7 +26,7 @@ class Api {
     };
 
     editData(id, data) {
-        return this.http.put(/tasks/ + id, {"task": data, "id": id})
+        return this.http.put('/tasks/' + id, {task: data})
             .catch(error => console.log(error));
     };
 }

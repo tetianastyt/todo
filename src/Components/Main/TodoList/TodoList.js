@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './TodoList.css'
 import TodoListItem from './TodoListItem/TodoListItem'
 import filter from './filter.png'
-import Api from '../../../engine/services/index'
+import Api from '../../../engine/services/api'
 import FormForAdding from "./FormForAdding/FormForAdding";
 
 function ForDoingList() {
@@ -22,7 +22,7 @@ function ForDoingList() {
 
     return (
         <>
-            <FormForAdding setData={setData} data={data} />
+            <FormForAdding setData={setData} />
             <img className="filter" src={filter} alt="filterButton"/>
             <div className="todoList_header">
                 <p><b>Tasks</b></p>
@@ -39,7 +39,6 @@ function ForDoingList() {
                             id={t.id}
                             task={t.task}
                             setData={setData}
-                            data={data}
                         />
                     )))
             }

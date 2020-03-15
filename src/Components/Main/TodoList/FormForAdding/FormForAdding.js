@@ -1,5 +1,5 @@
 import React, { useCallback, useState, } from 'react';
-import Api from '../../../../engine/services';
+import Api from '../../../../engine/services/api';
 import plus from './plus.png';
 import './FormForAdding.css'
 
@@ -17,7 +17,7 @@ function FormForAdding(props) {
                 .catch(error => console.log(error))
                 .finally(() => setInputValue(''));
         }
-    }, [])
+    }, [setData])
 
     const handleInputChange = useCallback((ev) => {
         const value = ev.target.value;

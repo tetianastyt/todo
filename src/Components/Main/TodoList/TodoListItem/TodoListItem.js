@@ -6,9 +6,7 @@ import EditButton from "../EditButton/EditButton";
 import FormForEditing from "./FormForEditing/FormForEditing";
 
 function TodoListItem(props) {
-    const task = props.task;
-    const id = props.id;
-    const setData = props.setData;
+    const { task, id, setData } = props;
     const [beingEdited, setBeingEdited] = useState(false);
 
     return (
@@ -28,10 +26,8 @@ function TodoListItem(props) {
                             <DeleteButton
                                 id={id}
                                 setData={setData}
-                                task={task}
                             />
                             <EditButton
-                                beingEdited={beingEdited}
                                 setBeingEdited={setBeingEdited}
                             />
                         </div>

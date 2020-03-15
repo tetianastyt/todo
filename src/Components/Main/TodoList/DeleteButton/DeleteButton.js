@@ -1,5 +1,5 @@
-import React, { useCallback, useState, } from 'react';
-import Api from '../../../../engine/services/index';
+import React, { useState, } from 'react';
+import Api from '../../../../engine/services/api';
 import './DeleteButton.css';
 import Modal from 'react-modal';
 
@@ -19,9 +19,7 @@ const customStyles = {
 };
 
 function DeleteButton(props){
-    const id = props.id;
-    const task = props.task;
-    const setData= props.setData;
+    const { id, setData } = props;
     const [modalIsOpen,setIsOpen] = useState(false);
     function openModal() {
         setIsOpen(true);

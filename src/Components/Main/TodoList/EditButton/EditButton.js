@@ -1,12 +1,12 @@
-import React, { useCallback, useState, useCallBack } from 'react';
+import React, { useCallback } from 'react';
 import './EditButton.css';
 
 function EditButton(props){
-    const {beingEdited, setBeingEdited} = props;
+    const { setBeingEdited } = props;
     const onEditing = useCallback(() => {
         setBeingEdited(true);
-        console.log(beingEdited);
-    },[])
+        //console.log(beingEdited);
+    },[setBeingEdited])
     return (
         <div>
             <button

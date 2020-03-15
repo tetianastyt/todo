@@ -1,26 +1,21 @@
-import React, { useCallback, useState, } from 'react';
-import Api from '../../../../../engine/services/index';
+import React, { useCallback, useState } from 'react';
+import Api from '../../../../../engine/services/api';
 import './FormForEditing.css'
 
 function FormForEditing(props) {
-    const task = props.task;
-    //const id = props.id;
-    const {setData, setBeingEdited} = props;
+    const {task, id, setData, setBeingEdited} = props;
     const [inputVal, setInputVal] = useState(task);
-    //const setBeingEdited = props.setBeingEdited;
 
     const onSubmitHandler_ed = useCallback((ev) => {
         ev.preventDefault();
-        if (ev.target[0].value.trim()) {
-            const editedTask = ev.target[0].value;
-            console.log(editedTask);
-            console.log(props.id);
-            Api.editData(props.id, editedTask)
-                .then(() => Api.getData()
-                    .then(res => setData(res.data))
-                    .finally(() => setBeingEdited(false)));
-        }
-    }, [])
+        if(inputVal.trim()){
+        Api.editData(id, inputVal)
+            .then(() => Api.getData())
+            .then(res => setData(res.data))
+            .finally(() => setBeingEdited(false));
+    } else {
+        alert("your task can't be empty")}
+        }, [inputVal, id, setBeingEdited, setData])
 
     const handleInputChanges = useCallback((ev) => {
         const value = ev.target.value;
