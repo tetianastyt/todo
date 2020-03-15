@@ -5,7 +5,6 @@ function EditButton(props){
     const { setBeingEdited } = props;
     const onEditing = useCallback(() => {
         setBeingEdited(true);
-        //console.log(beingEdited);
     },[setBeingEdited])
     return (
         <div>
