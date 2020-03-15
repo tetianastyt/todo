@@ -1,21 +1,25 @@
-import React, { useCallback, useState } from 'react';
-import Api from '../../../../../engine/services/api';
+import React, { useCallback, useState, } from 'react';
+import Api from '../../../../../engine/services';
 import './FormForEditing.css'
 
 function FormForEditing(props) {
-    const {task, id, setData, setBeingEdited} = props;
+    const {
+      setData,
+      setBeingEdited,
+      task,
+      id,
+    } = props;
+
     const [inputVal, setInputVal] = useState(task);
 
     const onSubmitHandler_ed = useCallback((ev) => {
         ev.preventDefault();
-        if(inputVal.trim()){
+
         Api.editData(id, inputVal)
-            .then(() => Api.getData())
+            .then(() => Api.getData()
             .then(res => setData(res.data))
-            .finally(() => setBeingEdited(false));
-    } else {
-        alert("your task can't be empty")}
-        }, [inputVal, id, setBeingEdited, setData])
+            .finally(() => setBeingEdited(false)));
+    }, [inputVal, id, setBeingEdited, setData]);
 
     const handleInputChanges = useCallback((ev) => {
         const value = ev.target.value;
@@ -24,7 +28,7 @@ function FormForEditing(props) {
 
     return (
         <form className="todoListItem" onSubmit={onSubmitHandler_ed}>
-            <input type="checkbox"/>
+            <input type="checkbox" />
             <input
                 className="styledInput_edit"
                 type="text"
