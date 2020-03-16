@@ -35,19 +35,27 @@ function DeleteButton(props){
 
     return (
         <div>
-            <button className="button" onClick={openModal}>Delete</button>
+            <button className="button" onClick={openModal}>
+                Delete
+            </button>
             <Modal
                 style={customStyles}
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
             >
                 <p>A u sure?</p>
-                    <button onClick={closeModal}>Nope</button>
-                    <button onClick={() => {
-                        deleteTask();
-                        closeModal();
-                    }}>
-                        Yep</button>
+                <form onSubmit={() => {
+                    deleteTask();
+                    closeModal();
+                }}>
+                    <button onClick={closeModal}>
+                        Nope
+                    </button>
+                    <button
+                        type="submit">
+                        Yep
+                    </button>
+                </form>
             </Modal>
         </div>
     );

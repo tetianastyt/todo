@@ -1,10 +1,10 @@
-import React, { useCallback, useState, } from 'react';
+import React, { useCallback, useState } from 'react';
 import Api from '../../../../engine/services/api';
 import plus from './plus.png';
 import './FormForAdding.css'
 
 function FormForAdding(props) {
-    const {setData} = props;
+    const {setData, textInput} = props;
     const [inputValue, setInputValue] = useState('');
 
     const onSubmitHandler = useCallback((ev) => {
@@ -17,7 +17,7 @@ function FormForAdding(props) {
                 .catch(error => console.log(error))
                 .finally(() => setInputValue(''));
         }
-    }, [setData])
+    }, [setData]);
 
     const handleInputChange = useCallback((ev) => {
         const value = ev.target.value;
@@ -32,6 +32,7 @@ function FormForAdding(props) {
                     value={inputValue}
                     onChange={handleInputChange}
                     placeholder="What should I do today?"
+                    ref={textInput}
                 />
                 <input
                     type="image"
@@ -43,4 +44,3 @@ function FormForAdding(props) {
 }
 
 export default FormForAdding;
-

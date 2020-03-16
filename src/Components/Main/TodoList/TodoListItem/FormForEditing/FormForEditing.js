@@ -1,4 +1,4 @@
-import React, { useCallback, useState, } from 'react';
+import React, {useCallback, useEffect, useState,} from 'react';
 import Api from '../../../../../engine/services/api';
 import './FormForEditing.css';
 
@@ -9,10 +9,15 @@ function FormForEditing(props) {
         task,
         id,
         isDone,
-        setIsDone
+        setIsDone,
+        textInput_ed
     } = props;
 
     const [inputVal, setInputVal] = useState(task);
+
+    useEffect(() => {
+        textInput_ed.current.focus();
+    });
 
     const onSubmitHandler_ed = useCallback((ev) => {
         ev.preventDefault();
@@ -45,6 +50,7 @@ function FormForEditing(props) {
                 type="text"
                 value={inputVal}
                 onChange={handleInputChanges}
+                ref={textInput_ed}
             />
             <button type="submit" className="button">Save</button>
         </form>
@@ -52,4 +58,3 @@ function FormForEditing(props) {
 }
 
 export default FormForEditing;
-
