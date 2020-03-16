@@ -6,6 +6,11 @@
     height: 80px;
     border-top: 3px solid #dbdbdb;
 }
+.crossedText {
+    text-decoration-line: line-through;
+    text-decoration-color: #2c98f2;
+    text-decoration-style: double;
+}
 .buttons {
     margin-right: 0;
     display: flex;

@@ -4,11 +4,14 @@ import './TodoListItem.css';
 import DeleteButton from "../DeleteButton/DeleteButton";
 import EditButton from "../EditButton/EditButton";
 import FormForEditing from "./FormForEditing/FormForEditing";
+import cn from "classnames";
 
 function TodoListItem(props) {
-    const { task, id, setData } = props;
+    const { task, id, setData, statusIsDone } = props;
     const [beingEdited, setBeingEdited] = useState(false);
+    const [isDone, setIsDone] = useState(statusIsDone);
 
+    const checkboxClass = cn('todoListItem', {'crossedText': isDone});
     return (
         <>
             {
@@ -18,9 +21,11 @@ function TodoListItem(props) {
                         id={id}
                         setData={setData}
                         setBeingEdited={setBeingEdited}
+                        isDone={isDone}
+                        setIsDone={setIsDone}
                     />
                 ) : (
-                    <div className="todoListItem">
+                    <div className={checkboxClass}>
                         {task}
                         <div className='buttons'>
                             <DeleteButton
@@ -44,8 +49,8 @@ TodoListItem.propTypes = {
 
 TodoListItem.defaultProps = {
     task: 'task'
-}
+};
 
-TodoListItem.displayName = "todoListItem"
+TodoListItem.displayName = "todoListItem";
 
 export default TodoListItem;

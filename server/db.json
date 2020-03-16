@@ -2,39 +2,53 @@
   "tasks": [
     {
       "id": 1,
-      "task": "click on item to complete1"
+      "task": "click on item to complete1",
+      "statusIsDone": false
     },
     {
       "id": 2,
-      "task": "click on item to complete2"
+      "task": "click on item to complete2",
+      "statusIsDone": false
     },
     {
       "id": 3,
-      "task": "click on item to complete3"
+      "task": "click on item to complete3",
+      "statusIsDone": false
     },
     {
       "id": 4,
-      "task": "click on item to complete4"
+      "task": "click on item to complete4",
+      "statusIsDone": false
     },
     {
       "id": 5,
-      "task": "click on item to complete5"
+      "task": "click on item to complete5",
+      "statusIsDone": false
     },
     {
       "id": 6,
-      "task": "click on item to complete6"
+      "task": "click on item to complete6",
+      "statusIsDone": false
     },
     {
       "id": 7,
-      "task": "click on item to complete7"
+      "task": "click on item to complete7",
+      "statusIsDone": false
     },
     {
-      "id": 8,
-      "task": "click on item to complete8"
+      "task": "click on item to complete8",
+      "statusIsDone": true,
+      "id": 8
     },
     {
-      "task": "oinl;",
+      "task": "lbj,klnm",
+      "statusIsDone": false,
       "id": 9
+    },
+    {
+      "task": "ouhi,klm",
+      "statusIsDone": true,
+      "id": 10
     }
   ]
 }

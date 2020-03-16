@@ -17,7 +17,7 @@ class Api {
     }
 
     postData(data) {
-        return this.http.post('/tasks', { "task": data });
+        return this.http.post('/tasks', { "task": data, "isDone": false });
     }
 
     deleteData(id) {
@@ -25,10 +25,11 @@ class Api {
             .catch(error => console.log(error));
     };
 
-    editData(id, data) {
-        return this.http.put('/tasks/' + id, {task: data})
+    editData(id, data, status) {
+        return this.http.put('/tasks/' + id, {task: data, statusIsDone: status})
             .catch(error => console.log(error));
     };
+
 }
 
 export default Api.getInstance();

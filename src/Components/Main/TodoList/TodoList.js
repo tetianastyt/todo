@@ -11,7 +11,6 @@ function ForDoingList() {
     const [isLoading, setIsLoading] = useState(false);
     if (error) throw error;
 
-
     useEffect(() => {
         setIsLoading(true);
         Api.getData()
@@ -38,6 +37,7 @@ function ForDoingList() {
                             key={t.id}
                             id={t.id}
                             task={t.task}
+                            statusIsDone={t.statusIsDone}
                             setData={setData}
                         />
                     )))
