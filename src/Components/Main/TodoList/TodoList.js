@@ -1,8 +1,8 @@
-import React, {useEffect, useState, useRef} from 'react'
-import './TodoList.css'
-import TodoListItem from './TodoListItem/TodoListItem'
-import filter from './filter.png'
-import Api from '../../../engine/services/api'
+import React, {useEffect, useState, useRef} from 'react';
+import './TodoList.css';
+import TodoListItem from './TodoListItem/TodoListItem';
+import filter from './filter.png';
+import Api from '../../../engine/services/api';
 import FormForAdding from "./FormForAdding/FormForAdding";
 
 function ForDoingList() {

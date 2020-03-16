@@ -47,11 +47,14 @@ function TodoListItem(props) {
 }
 
 TodoListItem.propTypes = {
-    task: PropTypes.string
+    task: PropTypes.string,
+    id: PropTypes.number.isRequired,
+    statusIsDone: PropTypes.bool
 };
 
 TodoListItem.defaultProps = {
-    task: 'task'
+    task: 'task',
+    statusIsDone: false
 };
 
 TodoListItem.displayName = "todoListItem";

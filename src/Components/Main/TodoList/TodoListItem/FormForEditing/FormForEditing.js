@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState,} from 'react';
 import Api from '../../../../../engine/services/api';
 import './FormForEditing.css';
+import PropTypes from "prop-types";
 
 function FormForEditing(props) {
     const {
@@ -56,5 +57,20 @@ function FormForEditing(props) {
         </form>
     )
 }
+
+FormForEditing.propTypes = {
+    task: PropTypes.string,
+    id: PropTypes.number.isRequired,
+    isDone: PropTypes.number,
+    //???????????  ---> string?
+    textInput_ed: PropTypes.string
+};
+
+FormForEditing.defaultProps = {
+    task: 'task',
+    statusIsDone: false
+};
+
+FormForEditing.displayName = "FormForEditing";
 
 export default FormForEditing;

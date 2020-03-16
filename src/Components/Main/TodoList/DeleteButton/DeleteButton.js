@@ -2,9 +2,9 @@ import React, { useState, } from 'react';
 import Api from '../../../../engine/services/api';
 import './DeleteButton.css';
 import Modal from 'react-modal';
+import PropTypes from "prop-types";
 
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
-//Modal.setAppElement('#yourAppElement')
+
 const customStyles = {
     content : {
         top                   : '50%',
@@ -60,5 +60,11 @@ function DeleteButton(props){
         </div>
     );
 }
+
+DeleteButton.propTypes = {
+    id: PropTypes.number.isRequired
+};
+
+DeleteButton.displayName = "DeleteButton";
 
 export default DeleteButton;

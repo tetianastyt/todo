@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import Api from '../../../../engine/services/api';
 import plus from './plus.png';
-import './FormForAdding.css'
+import './FormForAdding.css';
+import TodoListItem from "../TodoListItem/TodoListItem";
 
 function FormForAdding(props) {
     const {setData, textInput} = props;
@@ -42,5 +43,7 @@ function FormForAdding(props) {
             </form>
     )
 }
+
+TodoListItem.displayName = "FormForAdding";
 
 export default FormForAdding;

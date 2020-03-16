@@ -18,4 +18,5 @@ function EditButton(props){
         </div>
     );
 }
+
 export default EditButton;
