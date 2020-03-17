@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Api from '../../../../engine/services/api';
 import './DeleteButton.css';
 import Modal from 'react-modal';
@@ -19,9 +19,14 @@ const customStyles = {
 
 function DeleteButton(props){
     const { id, setData } = props;
-    const [modalIsOpen,setIsOpen] = useState(false);
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const yepButton = useRef(null);
+
     function openModal() {
         setIsOpen(true);
+    }
+    function afterOpenModal() {
+        yepButton.current.focus();
     }
     function closeModal(){
         setIsOpen(false);
@@ -32,7 +37,6 @@ function DeleteButton(props){
                 .then((res) => setData(res.data)))
     }
 
-
     return (
         <div>
             <button className="button" onClick={openModal}>
@@ -41,24 +45,23 @@ function DeleteButton(props){
             <Modal
                 style={customStyles}
                 isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
+                ariaHideApp={false}
             >
                 <p>A u sure?</p>
-                <form onSubmit={() => {
-                    deleteTask();
-                    closeModal();
-                }}
-                >
                 <button onClick={closeModal}>
                     Nope
                 </button>
                 <button
-                    id="submit"
-                    type="submit"
+                    ref={yepButton}
+                    onClick={() => {
+                        deleteTask();
+                        closeModal();
+                    }}
                 >
                     Yep
                 </button>
-                </form>
             </Modal>
         </div>
     );
@@ -72,16 +75,3 @@ DeleteButton.displayName = "DeleteButton";
 
 export default DeleteButton;
 
-{/*
-<button onClick={closeModal}>
-    Nope
-</button>
-<button
-ref={yepButton}
-onClick={() => {
-    deleteTask();
-    closeModal();
-}}
->
-Yep
-</button>*/}

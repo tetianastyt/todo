@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState,} from 'react';
+import React, {useCallback, useEffect, useRef, useState,} from 'react';
 import Api from '../../../../../engine/services/api';
 import './FormForEditing.css';
 import PropTypes from "prop-types";
@@ -10,15 +10,14 @@ function FormForEditing(props) {
         task,
         id,
         isDone,
-        setIsDone,
-        textInput_ed
+        setIsDone
     } = props;
-
     const [inputVal, setInputVal] = useState(task);
+    const textInput_ed = useRef(null);
 
     useEffect(() => {
         textInput_ed.current.focus();
-    });
+    }, [textInput_ed]);
 
     const onSubmitHandler_ed = useCallback((ev) => {
         ev.preventDefault();
@@ -65,14 +64,14 @@ function FormForEditing(props) {
 FormForEditing.propTypes = {
     task: PropTypes.string,
     id: PropTypes.number.isRequired,
-    isDone: PropTypes.number,
+    isDone: PropTypes.bool,
     //???????????  ---> string?
     textInput_ed: PropTypes.string
 };
 
 FormForEditing.defaultProps = {
     task: 'task',
-    statusIsDone: false
+    isDone: false
 };
 
 FormForEditing.displayName = "FormForEditing";

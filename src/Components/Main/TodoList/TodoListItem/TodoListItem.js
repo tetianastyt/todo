@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './TodoListItem.css';
 import DeleteButton from "../DeleteButton/DeleteButton";
@@ -10,7 +10,6 @@ function TodoListItem(props) {
     const { task, id, setData, statusIsDone } = props;
     const [beingEdited, setBeingEdited] = useState(false);
     const [isDone, setIsDone] = useState(statusIsDone);
-    const textInput_ed = useRef(null);
 
     const checkboxClass = cn('todoListItem', {'crossedText': isDone});
     return (
@@ -24,7 +23,6 @@ function TodoListItem(props) {
                         setBeingEdited={setBeingEdited}
                         isDone={isDone}
                         setIsDone={setIsDone}
-                        textInput_ed={textInput_ed}
                     />
                 ) : (
                     <div className={checkboxClass}>
