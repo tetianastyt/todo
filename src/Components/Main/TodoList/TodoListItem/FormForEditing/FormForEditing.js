@@ -22,12 +22,16 @@ function FormForEditing(props) {
 
     const onSubmitHandler_ed = useCallback((ev) => {
         ev.preventDefault();
-
+       if (inputVal) {
         Api.editData(id, inputVal, isDone)
             .then(() => Api.getData()
                 .then(res => setData(res.data))
                 .finally(() => setBeingEdited(false)));
-    }, [inputVal, id, setBeingEdited, setData, isDone]);
+       } else {
+           alert("your task can't be empty");
+           textInput_ed.current.focus();
+       }
+    }, [inputVal, id, setBeingEdited, setData, isDone, textInput_ed]);
 
     const handleInputChanges = useCallback((ev) => {
         const value = ev.target.value;

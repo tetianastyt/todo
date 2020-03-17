@@ -17,8 +17,11 @@ function FormForAdding(props) {
                 .then(res => setData(res.data))
                 .catch(error => console.log(error))
                 .finally(() => setInputValue(''));
+        } else {
+            alert("your task can't be empty");
         }
-    }, [setData]);
+        textInput.current.focus();
+    }, [setData, textInput]);
 
     const handleInputChange = useCallback((ev) => {
         const value = ev.target.value;

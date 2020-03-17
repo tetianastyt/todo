@@ -10,7 +10,6 @@ function TodoListItem(props) {
     const { task, id, setData, statusIsDone } = props;
     const [beingEdited, setBeingEdited] = useState(false);
     const [isDone, setIsDone] = useState(statusIsDone);
-
     const textInput_ed = useRef(null);
 
     const checkboxClass = cn('todoListItem', {'crossedText': isDone});

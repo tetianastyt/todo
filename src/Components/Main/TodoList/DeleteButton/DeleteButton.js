@@ -1,9 +1,8 @@
-import React, { useState, } from 'react';
+import React, { useState } from 'react';
 import Api from '../../../../engine/services/api';
 import './DeleteButton.css';
 import Modal from 'react-modal';
 import PropTypes from "prop-types";
-
 
 const customStyles = {
     content : {
@@ -33,6 +32,7 @@ function DeleteButton(props){
                 .then((res) => setData(res.data)))
     }
 
+
     return (
         <div>
             <button className="button" onClick={openModal}>
@@ -47,14 +47,17 @@ function DeleteButton(props){
                 <form onSubmit={() => {
                     deleteTask();
                     closeModal();
-                }}>
-                    <button onClick={closeModal}>
-                        Nope
-                    </button>
-                    <button
-                        type="submit">
-                        Yep
-                    </button>
+                }}
+                >
+                <button onClick={closeModal}>
+                    Nope
+                </button>
+                <button
+                    id="submit"
+                    type="submit"
+                >
+                    Yep
+                </button>
                 </form>
             </Modal>
         </div>
@@ -68,3 +71,17 @@ DeleteButton.propTypes = {
 DeleteButton.displayName = "DeleteButton";
 
 export default DeleteButton;
+
+{/*
+<button onClick={closeModal}>
+    Nope
+</button>
+<button
+ref={yepButton}
+onClick={() => {
+    deleteTask();
+    closeModal();
+}}
+>
+Yep
+</button>*/}

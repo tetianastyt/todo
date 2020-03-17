@@ -31,58 +31,14 @@
       "statusIsDone": false
     },
     {
-      "id": 7,
       "task": "click on item to complete7",
-      "statusIsDone": false
-    },
-    {
-      "task": "click on item to complete8",
       "statusIsDone": false,
+      "id": 7
+    },
+    {
+      "task": ";",
+      "isDone": false,
       "id": 8
-    },
-    {
-      "task": "ln;lnhl;",
-      "id": 9
-    },
-    {
-      "task": "obk",
-      "isDone": false,
-      "id": 10
-    },
-    {
-      "task": "pjobjkjnkknl",
-      "statusIsDone": true,
-      "id": 11
-    },
-    {
-      "task": "ljkb",
-      "isDone": false,
-      "id": 12
-    },
-    {
-      "task": "nkl",
-      "isDone": false,
-      "id": 13
-    },
-    {
-      "task": "m.",
-      "isDone": false,
-      "id": 14
-    },
-    {
-      "task": ";ln4",
-      "isDone": false,
-      "id": 15
-    },
-    {
-      "task": "ln",
-      "isDone": false,
-      "id": 16
-    },
-    {
-      "task": "hj;k'",
-      "isDone": false,
-      "id": 17
     }
   ]
 }
