@@ -24,7 +24,7 @@ function FormForEditing(props) {
        if (inputVal) {
         Api.editData(id, inputVal, isDone)
             .then(() => Api.getData()
-                .then(res => setData(res.data))
+                .then(res => setData(res.data.reverse()))
                 .finally(() => setBeingEdited(false)));
        } else {
            alert("your task can't be empty");

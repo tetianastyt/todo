@@ -1,9 +1,9 @@
 {
   "tasks": [
     {
-      "id": 1,
       "task": "click on item to complete1",
-      "statusIsDone": false
+      "statusIsDone": true,
+      "id": 1
     },
     {
       "id": 2,
@@ -21,24 +21,19 @@
       "statusIsDone": false
     },
     {
-      "id": 5,
       "task": "click on item to complete5",
-      "statusIsDone": false
+      "statusIsDone": true,
+      "id": 5
     },
     {
-      "id": 6,
       "task": "click on item to complete6",
-      "statusIsDone": false
+      "statusIsDone": true,
+      "id": 6
     },
     {
       "task": "click on item to complete7",
-      "statusIsDone": true,
-      "id": 7
-    },
-    {
-      "task": ";,klnlm;lm",
       "statusIsDone": false,
-      "id": 8
+      "id": 7
     }
   ]
 }

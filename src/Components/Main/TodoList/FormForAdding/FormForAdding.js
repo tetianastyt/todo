@@ -14,7 +14,7 @@ function FormForAdding(props) {
             const task = ev.target[0].value;
             Api.postData(task)
                 .then(() => Api.getData())
-                .then(res => setData(res.data))
+                .then(res => setData(res.data.reverse()))
                 .catch(error => console.log(error))
                 .finally(() => setInputValue(''));
         } else {

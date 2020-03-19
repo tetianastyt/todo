@@ -33,8 +33,8 @@ function DeleteButton(props){
     }
     function deleteTask() {
         Api.deleteData(id)
-            .then(() => Api.getData()
-                .then((res) => setData(res.data)))
+            .then(() => Api.getData())
+            .then((res) => setData(res.data.reverse()))
     }
 
     return (
