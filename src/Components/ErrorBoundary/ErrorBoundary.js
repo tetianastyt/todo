@@ -19,7 +19,6 @@ class ErrorBoundary extends React.Component {
         if (this.state.hasError) {
             return (
                 <div>
-                    <img src={logo} alt="logo"/>
                     <h1>Smth went wrong </h1>
                 </div>
             )
@@ -29,7 +28,6 @@ class ErrorBoundary extends React.Component {
 }
 */
 
-
 class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
@@ -37,7 +35,7 @@ class ErrorBoundary extends React.Component {
             hasError: false
         };
     }
-    componentDidCatch(error, info) {
+    componentDidCatch(error) {
         this.setState({
             hasError: true
         });
@@ -49,6 +47,5 @@ class ErrorBoundary extends React.Component {
         return this.props.children;
     }
 }
-
 
 export default ErrorBoundary;
