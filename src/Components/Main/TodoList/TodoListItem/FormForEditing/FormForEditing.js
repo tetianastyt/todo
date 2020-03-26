@@ -1,11 +1,24 @@
 import React, {useCallback, useEffect, useRef, useState,} from 'react';
-import Api from '../../../../../engine/services/api';
 import './FormForEditing.css';
 import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
+import {editTodoListData} from "../../../../../engine/core/todos/actions";
+
+function useEditTodoListData() {
+    const dispatch = useDispatch();
+
+    const editRequest = useCallback((id, inputVal, isDone)  => {
+        dispatch(editTodoListData(id, inputVal, isDone))
+    }, [dispatch]);
+
+    return {
+        editRequest,
+    }
+}
 
 function FormForEditing(props) {
+    const { editRequest } = useEditTodoListData();
     const {
-        setData,
         setBeingEdited,
         task,
         id,
@@ -21,16 +34,14 @@ function FormForEditing(props) {
 
     const onSubmitHandler_ed = useCallback((ev) => {
         ev.preventDefault();
-       if (inputVal) {
-        Api.editData(id, inputVal, isDone)
-            .then(() => Api.getData()
-                .then(res => setData(res.data.reverse()))
-                .finally(() => setBeingEdited(false)));
+        if (inputVal) {
+            editRequest(id, inputVal, isDone);
+            setBeingEdited(false);
        } else {
            alert("your task can't be empty");
            textInput_ed.current.focus();
        }
-    }, [inputVal, id, setBeingEdited, setData, isDone, textInput_ed]);
+    }, [inputVal, id, setBeingEdited, isDone, textInput_ed, editRequest]);
 
     const handleInputChanges = useCallback((ev) => {
         const value = ev.target.value;

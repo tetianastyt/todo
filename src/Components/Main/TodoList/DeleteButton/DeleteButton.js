@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
-import Api from '../../../../engine/services/api';
+import React, {useCallback, useRef, useState} from 'react';
 import './DeleteButton.css';
 import Modal from 'react-modal';
 import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
+import {deleteTodoListData} from "../../../../engine/core/todos/actions";
 
 const customStyles = {
     content : {
@@ -17,8 +18,21 @@ const customStyles = {
     }
 };
 
+function useDeleteTodoListData() {
+    const dispatch = useDispatch();
+
+    const deleteRequest = useCallback((task)  => {
+        dispatch(deleteTodoListData(task))
+    }, [dispatch]);
+
+    return {
+        deleteRequest,
+    }
+}
+
 function DeleteButton(props){
-    const { id, setData } = props;
+    const { id } = props;
+    const { deleteRequest } = useDeleteTodoListData();
     const [modalIsOpen, setIsOpen] = useState(false);
     const yepButton = useRef(null);
 
@@ -32,9 +46,7 @@ function DeleteButton(props){
         setIsOpen(false);
     }
     function deleteTask() {
-        Api.deleteData(id)
-            .then(() => Api.getData())
-            .then((res) => setData(res.data.reverse()))
+        deleteRequest(id)
     }
 
     return (

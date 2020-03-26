@@ -1,27 +1,38 @@
 import React, { useCallback, useState } from 'react';
-import Api from '../../../../engine/services/api';
 import plus from './plus.png';
 import './FormForAdding.css';
 import TodoListItem from "../TodoListItem/TodoListItem";
+import {useDispatch} from "react-redux";
+import {postTodoListData} from "../../../../engine/core/todos/actions";
+
+function usePostTodoListData() {
+    const dispatch = useDispatch();
+
+    const postRequest = useCallback((task)  => {
+        dispatch(postTodoListData(task))
+    }, [dispatch]);
+
+    return {
+        postRequest
+    }
+}
 
 function FormForAdding(props) {
-    const {setData, textInput} = props;
+    const { textInput } = props;
+    const { postRequest } = usePostTodoListData();
     const [inputValue, setInputValue] = useState('');
 
     const onSubmitHandler = useCallback((ev) => {
         ev.preventDefault();
         if (ev.target[0].value.trim()) {
             const task = ev.target[0].value;
-            Api.postData(task)
-                .then(() => Api.getData())
-                .then(res => setData(res.data.reverse()))
-                .catch(error => console.log(error))
-                .finally(() => setInputValue(''));
+            postRequest(task);
+            setInputValue('');
         } else {
             alert("your task can't be empty");
         }
         textInput.current.focus();
-    }, [setData, textInput]);
+    }, [textInput, postRequest]);
 
     const handleInputChange = useCallback((ev) => {
         const value = ev.target.value;

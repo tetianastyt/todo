@@ -17,7 +17,7 @@ class Api {
     }
 
     postData(data) {
-        return this.http.post('/tasks', { "task": data, "isDone": false });
+        return this.http.post('/tasks', { "task": data, "statusIsDone": false });
     }
 
     deleteData(id) {

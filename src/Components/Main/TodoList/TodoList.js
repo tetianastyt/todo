@@ -1,37 +1,50 @@
-import React, {useEffect, useState, useRef } from 'react';
+import React, {useEffect, useState, useRef, useCallback } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import './TodoList.css';
+import FormForAdding from './FormForAdding/FormForAdding';
 import TodoListItem from './TodoListItem/TodoListItem';
-import Api from '../../../engine/services/api';
-import FormForAdding from "./FormForAdding/FormForAdding";
-//MaterialUI
-import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import {getTodoListData} from "../../../engine/core/todos/actions";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link,
     Redirect
-} from "react-router-dom";
+} from 'react-router-dom';
+//MaterialUI
+import { makeStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+function useTodoListData() {
+    const dispatch = useDispatch();
+    const todoList = useSelector(state => state.todos.todoList);
+    const isLoading = useSelector(state => state.todos.isLoading);
+    const error = useSelector(state => state.todos.error);
+
+    const getRequest = useCallback(()  => {
+        dispatch(getTodoListData())
+    }, [dispatch]);
+
+    return {
+        data: todoList,
+        getRequest,
+        error,
+        isLoading
+    }
+}
 
 function ForDoingList() {
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(null);
+    const { data, getRequest, error, isLoading } = useTodoListData();
     if (error) throw error;
-    const [isLoading, setIsLoading] = useState(false);
     const textInput = useRef(null);
 
     useEffect(() => {
-        setIsLoading(true);
-        Api.getData()
-            .then(res => setData(res.data.reverse()))
-            .catch(err => setError(err))
-            .finally(() => setIsLoading(false));
+        getRequest();
         textInput.current.focus();
-    }, []);
+    }, [getRequest]);
 
     const useStyles = makeStyles(theme => ({
         formControl: {
@@ -59,35 +72,22 @@ function ForDoingList() {
 
     return (
         <>
-            <FormForAdding setData={setData} textInput={textInput}/>
-            {isLoading ? (
-                <>
-                    <br/>
-                    <br/>
-                    <div>Loading...</div>
-                </>
-            ) : (
+            <FormForAdding textInput={textInput}/>
                 <Router>
                     <React.Fragment>
                         <div className="filter">
                             <FormControl className={classes.formControl}>
-                                <Select value={chosenCategory}
+                                <Select value=''
                                         onChange={handleChange}
                                         displayEmpty className={classes.selectEmpty}>
                                     <Link to='/'>
-                                        <MenuItem value={"all"}>
-                                            <em>All</em>
-                                        </MenuItem>
+                                        <MenuItem value="all">All</MenuItem>
                                     </Link>
                                     <Link to='/inprogress'>
-                                        <MenuItem value={"inProgress"}>
-                                            In progress
-                                        </MenuItem>
+                                        <MenuItem value="inProgress">In progress</MenuItem>
                                     </Link>
                                     <Link to='/done'>
-                                        <MenuItem value={"done"}>
-                                            Done
-                                        </MenuItem>
+                                        <MenuItem value="done">Done</MenuItem>
                                     </Link>
                                 </Select>
                                 <FormHelperText>Choose task's category</FormHelperText>
@@ -102,6 +102,9 @@ function ForDoingList() {
                             <p><b>Actions</b></p>
                         </div>
 
+                        {isLoading &&
+                            <div>Loading...</div>}
+
                         <Switch>
                             <Route exact path='/'>
                                 {(data.map(t => (
@@ -110,7 +113,6 @@ function ForDoingList() {
                                         id={t.id}
                                         task={t.task}
                                         statusIsDone={t.statusIsDone}
-                                        setData={setData}
                                     />
                                 )))}
                             </Route>
@@ -121,7 +123,6 @@ function ForDoingList() {
                                         id={t.id}
                                         task={t.task}
                                         statusIsDone={t.statusIsDone}
-                                        setData={setData}
                                     />
                                 )))}
                             </Route>
@@ -132,7 +133,6 @@ function ForDoingList() {
                                         id={t.id}
                                         task={t.task}
                                         statusIsDone={t.statusIsDone}
-                                        setData={setData}
                                     />
                                 )))}
                             </Route>
@@ -144,10 +144,10 @@ function ForDoingList() {
                         </Switch>
                     </React.Fragment>
                 </Router>
-            )}
         </>
     );
 }
+
 function TodoList() {
     return (
         <div>

@@ -8,6 +8,7 @@ import cn from "classnames";
 
 function TodoListItem(props) {
     const { task, id, setData, statusIsDone } = props;
+
     const [beingEdited, setBeingEdited] = useState(false);
     const [isDone, setIsDone] = useState(statusIsDone);
 
