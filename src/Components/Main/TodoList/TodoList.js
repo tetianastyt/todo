@@ -1,9 +1,9 @@
-import React, {useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import './TodoList.css';
 import FormForAdding from './FormForAdding/FormForAdding';
 import TodoListItem from './TodoListItem/TodoListItem';
-import {getTodoListData} from "../../../engine/core/todos/actions";
+import { getTodoListData } from "../../../engine/core/todos/actions";
 import {
     BrowserRouter as Router,
     Switch,
@@ -12,17 +12,18 @@ import {
     Redirect
 } from 'react-router-dom';
 //MaterialUI
-import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import useStyles from "./TodolistMUI";
 
 function useTodoListData() {
     const dispatch = useDispatch();
     const todoList = useSelector(state => state.todos.todoList);
     const isLoading = useSelector(state => state.todos.isLoading);
     const error = useSelector(state => state.todos.error);
+    //const todoItemStatus = useSelector(state => state.todos.todoList.map(() => );
 
     const getRequest = useCallback(()  => {
         dispatch(getTodoListData())
@@ -33,11 +34,13 @@ function useTodoListData() {
         getRequest,
         error,
         isLoading
+        //todoItemStatus
     }
 }
 
 function ForDoingList() {
     const { data, getRequest, error, isLoading } = useTodoListData();
+    const classes = useStyles();
     if (error) throw error;
     const textInput = useRef(null);
 
@@ -45,30 +48,6 @@ function ForDoingList() {
         getRequest();
         textInput.current.focus();
     }, [getRequest]);
-
-    const useStyles = makeStyles(theme => ({
-        formControl: {
-            margin: theme.spacing(1),
-            minWidth: 70,
-            maxWidth: 140,
-            fontFamily: '"Open Sans"'
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(2),
-            fontFamily: '"Open Sans"',
-            fontSize: 18,
-            '@media (max-width:560px)': {
-                fontSize: 12
-            }
-        },
-    }));
-    const classes = useStyles();
-    const [chosenCategory, setChosenCategory] = useState('');
-
-    const handleChange = event => {
-        setChosenCategory(event.target.value);
-        console.log(chosenCategory);
-    };
 
     return (
         <>
@@ -78,7 +57,7 @@ function ForDoingList() {
                         <div className="filter">
                             <FormControl className={classes.formControl}>
                                 <Select value=''
-                                        onChange={handleChange}
+                                    /*{onChange={handleChange}}*/
                                         displayEmpty className={classes.selectEmpty}>
                                     <Link to='/'>
                                         <MenuItem value="all">All</MenuItem>
@@ -113,6 +92,7 @@ function ForDoingList() {
                                         id={t.id}
                                         task={t.task}
                                         statusIsDone={t.statusIsDone}
+                                        data = {data}
                                     />
                                 )))}
                             </Route>
@@ -157,3 +137,11 @@ function TodoList() {
 }
 
 export default TodoList;
+
+/* const [chosenCategory, setChosenCategory] = useState('');
+
+   const handleChange = event => {
+       event.preventDefault();
+       setChosenCategory(event.target.value);
+       console.log(event.target.value);
+   };*/

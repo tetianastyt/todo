@@ -1,22 +1,10 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import './DeleteButton.css';
 import Modal from 'react-modal';
 import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
 import {deleteTodoListData} from "../../../../engine/core/todos/actions";
-
-const customStyles = {
-    content : {
-        top                   : '50%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)',
-        height                : '25%',
-        width                 : '25%',
-    }
-};
+import customStyles from "./ModalStyle";
 
 function useDeleteTodoListData() {
     const dispatch = useDispatch();

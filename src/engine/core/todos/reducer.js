@@ -5,7 +5,7 @@ import { SET_ERROR } from "./types";
 const initialState = {
     todoList: [],
     error: null,
-    isLoading: false
+    isLoading: false,
 };
 
 export function todosReducer(state = initialState, action) {

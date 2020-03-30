@@ -37,10 +37,10 @@ function FormForEditing(props) {
         if (inputVal) {
             editRequest(id, inputVal, isDone);
             setBeingEdited(false);
-       } else {
-           alert("your task can't be empty");
-           textInput_ed.current.focus();
-       }
+        } else {
+            alert("your task can't be empty");
+            textInput_ed.current.focus();
+        }
     }, [inputVal, id, setBeingEdited, isDone, textInput_ed, editRequest]);
 
     const handleInputChanges = useCallback((ev) => {
