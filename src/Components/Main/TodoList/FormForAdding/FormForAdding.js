@@ -1,38 +1,31 @@
+//Core
 import React, { useCallback, useState } from 'react';
-import plus from './plus.png';
-import './FormForAdding.css';
-import TodoListItem from "../TodoListItem/TodoListItem";
 import {useDispatch} from "react-redux";
+//Imgs
+import plus from './plus.png';
+//Style
+import './FormForAdding.css';
+//Components
+import TodoListItem from "../TodoListItem/TodoListItem";
+//Action
 import {postTodoListData} from "../../../../engine/core/todos/actions";
-
-function usePostTodoListData() {
-    const dispatch = useDispatch();
-
-    const postRequest = useCallback((task)  => {
-        dispatch(postTodoListData(task))
-    }, [dispatch]);
-
-    return {
-        postRequest
-    }
-}
 
 function FormForAdding(props) {
     const { textInput } = props;
-    const { postRequest } = usePostTodoListData();
+    const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState('');
 
     const onSubmitHandler = useCallback((ev) => {
         ev.preventDefault();
         if (ev.target[0].value.trim()) {
             const task = ev.target[0].value;
-            postRequest(task);
+            dispatch(postTodoListData(task));
             setInputValue('');
         } else {
             alert("your task can't be empty");
         }
         textInput.current.focus();
-    }, [textInput, postRequest]);
+    }, [textInput, dispatch]);
 
     const handleInputChange = useCallback((ev) => {
         const value = ev.target.value;

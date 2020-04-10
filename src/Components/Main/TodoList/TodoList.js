@@ -1,9 +1,14 @@
+//Modules
 import React, { useEffect, useRef, useCallback } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import './TodoList.css';
+import { useSelector, useDispatch } from 'react-redux';
+//Action
+import { getTodoListData } from '../../../engine/core/todos/actions';
+//Selectors
+import * as selectors from '../../../engine/core/todos/selectors'
+//Components
 import FormForAdding from './FormForAdding/FormForAdding';
 import TodoListItem from './TodoListItem/TodoListItem';
-import { getTodoListData } from "../../../engine/core/todos/actions";
+//Navigation
 import {
     BrowserRouter as Router,
     Switch,
@@ -11,19 +16,20 @@ import {
     Link,
     Redirect
 } from 'react-router-dom';
-//MaterialUI
+//Styles
+import './TodoList.css';
+import useStyles from "./TodolistMUI";
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import useStyles from "./TodolistMUI";
+
 
 function useTodoListData() {
     const dispatch = useDispatch();
-    const todoList = useSelector(state => state.todos.todoList);
-    const isLoading = useSelector(state => state.todos.isLoading);
-    const error = useSelector(state => state.todos.error);
-    //const todoItemStatus = useSelector(state => state.todos.todoList.map(() => );
+    const todoList = useSelector(selectors.todoListSelector);
+    const isLoading = useSelector(selectors.isLoadingSelector);
+    const error = useSelector(selectors.errorSelector);
 
     const getRequest = useCallback(()  => {
         dispatch(getTodoListData())
@@ -34,7 +40,6 @@ function useTodoListData() {
         getRequest,
         error,
         isLoading
-        //todoItemStatus
     }
 }
 
@@ -56,8 +61,7 @@ function ForDoingList() {
                     <React.Fragment>
                         <div className="filter">
                             <FormControl className={classes.formControl}>
-                                <Select value=''
-                                    /*{onChange={handleChange}}*/
+                                <Select value=""
                                         displayEmpty className={classes.selectEmpty}>
                                     <Link to='/'>
                                         <MenuItem value="all">All</MenuItem>
@@ -72,10 +76,7 @@ function ForDoingList() {
                                 <FormHelperText>Choose task's category</FormHelperText>
                             </FormControl>
                         </div>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
+
                         <div className="todoList_header">
                             <p><b>Tasks</b></p>
                             <p><b>Actions</b></p>
@@ -88,31 +89,31 @@ function ForDoingList() {
                             <Route exact path='/'>
                                 {(data.map(t => (
                                     <TodoListItem
-                                        key={t.id}
-                                        id={t.id}
-                                        task={t.task}
-                                        statusIsDone={t.statusIsDone}
+                                        key={t.get('id')}
+                                        id={t.get('id')}
+                                        task={t.get('task')}
+                                        statusIsDone={t.get('statusIsDone')}
                                         data = {data}
                                     />
                                 )))}
                             </Route>
                             <Route path='/inprogress'>
-                                {(data.filter(t => t.statusIsDone === false).map(t => (
+                                {(data.filter(t => t.get('statusIsDone') === false).map(t => (
                                     <TodoListItem
-                                        key={t.id}
-                                        id={t.id}
-                                        task={t.task}
-                                        statusIsDone={t.statusIsDone}
+                                        key={t.get('id')}
+                                        id={t.get('id')}
+                                        task={t.get('task')}
+                                        statusIsDone={t.get('statusIsDone')}
                                     />
                                 )))}
                             </Route>
                             <Route path='/done'>
-                                {(data.filter(t => t.statusIsDone === true).map(t => (
+                                {(data.filter(t => t.get('statusIsDone') === true).map(t => (
                                     <TodoListItem
-                                        key={t.id}
-                                        id={t.id}
-                                        task={t.task}
-                                        statusIsDone={t.statusIsDone}
+                                        key={t.get('id')}
+                                        id={t.get('id')}
+                                        task={t.get('task')}
+                                        statusIsDone={t.get('statusIsDone')}
                                     />
                                 )))}
                             </Route>
@@ -139,7 +140,7 @@ function TodoList() {
 export default TodoList;
 
 /* const [chosenCategory, setChosenCategory] = useState('');
-
+onChange={handleChange}
    const handleChange = event => {
        event.preventDefault();
        setChosenCategory(event.target.value);

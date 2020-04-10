@@ -1,5 +1,8 @@
+//Core
 import React from 'react';
+//Style
 import './Footer.css';
+//Img
 import logo from './Brainstation.png';
 
 

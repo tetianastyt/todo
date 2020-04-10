@@ -1,4 +1,6 @@
+//Core
 import React from 'react';
+//Style
 import './Header.css';
 
 function Header() {

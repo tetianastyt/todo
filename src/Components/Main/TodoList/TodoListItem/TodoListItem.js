@@ -1,10 +1,14 @@
+//Modules
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import cn from "classnames";
+//Styles
 import './TodoListItem.css';
+//Components
 import DeleteButton from "../DeleteButton/DeleteButton";
 import EditButton from "../EditButton/EditButton";
 import FormForEditing from "./FormForEditing/FormForEditing";
-import cn from "classnames";
+
 
 function TodoListItem(props) {
     const { task, id, setData, statusIsDone } = props;

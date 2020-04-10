@@ -1,28 +1,20 @@
-import React, { useCallback, useRef, useState } from 'react';
-import './DeleteButton.css';
-import Modal from 'react-modal';
+//Modules
+import React, { useRef, useState } from 'react';
 import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
-import {deleteTodoListData} from "../../../../engine/core/todos/actions";
+//Components
+import Modal from 'react-modal';
+//Styles
 import customStyles from "./ModalStyle";
-
-function useDeleteTodoListData() {
-    const dispatch = useDispatch();
-
-    const deleteRequest = useCallback((task)  => {
-        dispatch(deleteTodoListData(task))
-    }, [dispatch]);
-
-    return {
-        deleteRequest,
-    }
-}
+import './DeleteButton.css';
+//Action
+import {deleteTodoListData} from "../../../../engine/core/todos/actions";
 
 function DeleteButton(props){
     const { id } = props;
-    const { deleteRequest } = useDeleteTodoListData();
     const [modalIsOpen, setIsOpen] = useState(false);
     const yepButton = useRef(null);
+    const dispatch = useDispatch();
 
     function openModal() {
         setIsOpen(true);
@@ -34,7 +26,7 @@ function DeleteButton(props){
         setIsOpen(false);
     }
     function deleteTask() {
-        deleteRequest(id)
+        dispatch(deleteTodoListData(id));
     }
 
     return (

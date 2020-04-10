@@ -31,19 +31,9 @@
       "id": 6
     },
     {
-      "task": "click on item to complete7",
+      "task": "click on item to complete70/",
       "statusIsDone": true,
       "id": 7
-    },
-    {
-      "task": "rx s",
-      "statusIsDone": true,
-      "id": 8
-    },
-    {
-      "task": "vf",
-      "statusIsDone": false,
-      "id": 9
     }
   ]
 }

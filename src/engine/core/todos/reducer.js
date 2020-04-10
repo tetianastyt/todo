@@ -1,14 +1,28 @@
-import { SET_TODO_LIST_DATA } from './types';
-import { SET_TODO_LIST_DATA_LOADING } from "./types";
-import { SET_ERROR } from "./types";
+import {createReducer} from 'redux-immutablejs';
+import {fromJS, Map, List} from 'immutable'
+import * as types from './types';
 
-const initialState = {
-    todoList: [],
+const initialState = Map({
+    todoList: List(),
     error: null,
     isLoading: false,
-};
+});
 
-export function todosReducer(state = initialState, action) {
+export const todosReducer= createReducer(initialState, {
+    [types.SET_TODO_LIST_DATA]: (state, action) => {
+        const data = fromJS(action.payload);
+        return state.setIn(['todoList'], data);
+    },
+    [types.SET_ERROR]: (state, action) => (
+        state.setIn(['error'], action.payload)
+    ),
+    [types.SET_TODO_LIST_DATA_LOADING]: (state, action) => (
+        state.setIn(['isLoading'], action.payload)
+    ),
+});
+
+
+/*export function todosReducer(state = initialState, action) {
     const {type, payload} = action;
     switch (type) {
         case SET_TODO_LIST_DATA: {
@@ -33,4 +47,4 @@ export function todosReducer(state = initialState, action) {
             return state;
         }
     }
-}
+}*/

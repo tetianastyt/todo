@@ -1,7 +1,10 @@
+//Core
 import React from 'react';
-import './Main.css';
-import TodoList from "./TodoList/TodoList";
+//Components
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import TodoList from "./TodoList/TodoList";
+//Style
+import './Main.css';
 
 function Main() {
     return (
